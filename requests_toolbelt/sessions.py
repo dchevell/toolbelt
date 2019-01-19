@@ -55,7 +55,7 @@ class BaseUrlSession(requests.Session):
 
     def __init__(self, base_url=None):
         if base_url:
-            self.base_url = base_url
+            self.base_url = base_url + '/'
         super(BaseUrlSession, self).__init__()
 
     def request(self, method, url, *args, **kwargs):
@@ -67,4 +67,4 @@ class BaseUrlSession(requests.Session):
 
     def create_url(self, url):
         """Create the URL based off this partial path."""
-        return urljoin(self.base_url, url)
+        return urljoin(self.base_url, url.lstrip('/'))
